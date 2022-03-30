@@ -8,3 +8,16 @@ before_install:
 
 script:
   - docker run argahv/docker-react npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-west-2"
+  app: "arg-docker-react"
+  env: "Argdockerreact-env"
+  bucket_name: "elasticbeanstalk-us-west-2-761929450279"
+  bucket_path: "arg-docker-react"
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
